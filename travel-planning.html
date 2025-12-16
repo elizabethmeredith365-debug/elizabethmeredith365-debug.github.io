@@ -106,25 +106,73 @@
             </div>
         </section>
 
+        <!-- REPLACE THE VIDEO SECTION WITH THIS: -->
+
         <section class="video-section">
             <h2>Travel Inspiration Video</h2>
-            <p>Here's a video about these incredible destinations to spark your wanderlust:</p>
+            <p>Here's a video about travel and exploration to spark your wanderlust:</p>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/ZfV1h9eXzr8" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-full-screen" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/Rz626Ff-uUI" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-full-screen" allowfullscreen></iframe>
             </div>
         </section>
 
+<!-- REPLACE THE TABLEAU SECTION WITH THIS: -->
+
         <section class="tableau-section">
-            <h2>World Tourism Statistics</h2>
-            <p>Explore international tourism data with this interactive visualization:</p>
-            <div class="tableau-container">
-                <iframe 
-    src="https://public.tableau.com/views/WorldPopulation_16842667032210/Dashboard1?:showVizHome=no&:embed=true" 
-    width="100%" 
-    height="600" 
-    frameborder="0">
-</iframe>
+            <h2>Top Travel Destinations by Popularity</h2>
+            <p>Interactive chart showing the most visited countries worldwide:</p>
+            <div class="chart-wrapper">
+                <canvas id="myChart"></canvas>
             </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+            <script>
+                const ctx = document.getElementById('myChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['France', 'Spain', 'Italy', 'Turkey', 'Greece', 'Brazil', 'Maldives'],
+                        datasets: [{
+                            label: 'Annual International Visitors (Millions)',
+                            data: [89, 58, 52, 46, 28, 15, 2],
+                            backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#00f2fe', '#43e97b', '#fa709a'],
+                            borderColor: '#333',
+                            borderWidth: 2,
+                            borderRadius: 5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                labels: {
+                                    font: { size: 14 },
+                                    color: '#333',
+                                    padding: 15
+                                }
+                            },
+                            title: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + 'M';
+                                    }
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Visitors in Millions'
+                                }
+                            }
+                        }
+                    }
+                });
+            </script>
         </section>
     </main>
 
