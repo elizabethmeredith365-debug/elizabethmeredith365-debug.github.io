@@ -438,3 +438,15 @@ section p {
         text-align: center;
     }
 }
+/* CHART WRAPPER */
+.chart-wrapper {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+.chart-wrapper canvas {
+    max-height: 400px;
+}
