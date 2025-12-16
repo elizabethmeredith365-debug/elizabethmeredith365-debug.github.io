@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Which Destination Should You Visit?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .back-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .back-link:hover {
+            color: #ffd700;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            margin-top: 60px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .quiz-container {
+            display: none;
+        }
+
+        .quiz-container.active {
+            display: block;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .question-number {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+        }
+
+        .option:hover {
+            background-color: #e8f0ff;
+            border-color: #667eea;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .option label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn-next {
+            background-color: #667eea;
+            color: white;
+        }
+
+        .btn-next:hover {
+            background-color: #5568d3;
+        }
+
+        .btn-next:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .btn-reset {
+            background-color: #764ba2;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background-color: #653a8a;
+        }
+
+        .result-container {
+            display: none;
+            text-align: center;
+        }
+
+        .result-container.active {
+            display: block;
+        }
+
+        .result-emoji {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .result-title {
+            color: #667eea;
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .result-description {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .result-details {
+            background-color: #f0f4ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .result-details h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .result-details ul {
+            list-style-position: inside;
+            color: #555;
+        }
+
+        .result-details li {
+            margin-bottom: 8px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #ddd;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #667eea;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .result-title {
+                font-size: 28px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="travel-planning.html" class="back-link">← Back to Travel Planning</a>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🌍 Which Destination Should You Visit?</h1>
+            <p>Answer a few questions to discover your perfect travel destination!</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <!-- QUIZ SECTION -->
+        <div class="quiz-container active" id="quizContainer">
+            <div class="question-number" id="questionNumber">Question 1 of 5</div>
+            <div class="question">
+                <h2 id="questionText"></h2>
+                <div class="options" id="optionsContainer"></div>
+            </div>
+            <div class="button-group">
+                <button class="btn-next" id="nextBtn" onclick="nextQuestion()" disabled>Next Question</button>
+            </div>
+        </div>
+
+        <!-- RESULTS SECTION -->
+        <div class="result-container" id="resultContainer">
+            <div class="result-emoji" id="resultEmoji"></div>
+            <div class="result-title" id="resultTitle"></div>
+            <div class="result-description" id="resultDescription"></div>
+            <div class="result-details" id="resultDetails"></div>
+            <button class="btn-reset" onclick="resetQuiz()">Take Quiz Again</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What's your ideal vacation vibe?",
+                options: [
+                    { text: "Ancient history and culture", destination: "greece" },
+                    { text: "Vibrant energy and adventure", destination: "brazil" },
+                    { text: "Peaceful paradise and relaxation", destination: "maldives" }
+                ]
+            },
+            {
+                question: "How do you prefer to spend your time?",
+                options: [
+                    { text: "Exploring historical ruins and museums", destination: "greece" },
+                    { text: "Experiencing local culture and nightlife", destination: "brazil" },
+                    { text: "Snorkeling and water activities", destination: "maldives" }
+                ]
+            },
+            {
+                question: "What kind of climate do you prefer?",
+                options: [
+                    { text: "Mild and sunny (spring/fall)", destination: "greece" },
+                    { text: "Warm and humid year-round", destination: "brazil" },
+                    { text: "Tropical and pristine", destination: "maldives" }
+                ]
+            },
+            {
+                question: "What's your budget comfort level?",
+                options: [
+                    { text: "Moderate - good value destinations", destination: "greece" },
+                    { text: "Budget-friendly - plenty to explore for less", destination: "brazil" },
+                    { text: "Luxury - willing to splurge for luxury experiences", destination: "maldives" }
+                ]
+            },
+            {
+                question: "What's your travel style?",
+                options: [
+                    { text: "Cultural immersion and landmarks", destination: "greece" },
+                    { text: "Adrenaline and natural wonders", destination: "brazil" },
+                    { text: "Luxury resorts and isolation", destination: "maldives" }
+                ]
+            }
+        ];
+
+        const destinations = {
+            greece: {
+                emoji: "🏛️",
+                title: "Greece",
+                description: "You're a history lover with a taste for Mediterranean charm!",
+                details: `
+                    <h3>Why Greece is Perfect for You:</h3>
+                    <ul>
+                        <li>Explore ancient ruins like the Parthenon and Acropolis</li>
+                        <li>Relax on beautiful islands like Santorini and Mykonos</li>
+                        <li>Experience legendary Greek hospitality and cuisine</li>
+                        <li>Walk through history while enjoying stunning landscapes</li>
+                        <li>Best time to visit: April-June or September-October</li>
+                    </ul>
+                `
+            },
+            brazil: {
+                emoji: "🎭",
+                title: "Brazil",
+                description: "You're an adventurer seeking vibrant energy and cultural experiences!",
+                details: `
+                    <h3>Why Brazil is Perfect for You:</h3>
+                    <ul>
+                        <li>Experience the electrifying energy of Carnival</li>
+                        <li>Explore the Amazon rainforest and wildlife</li>
+                        <li>Dance to samba and immerse in local culture</li>
+                        <li>Marvel at natural wonders like Iguazu Falls</li>
+                        <li>Best time to visit: December-March or September-November</li>
+                    </ul>
+                `
+            },
+            maldives: {
+                emoji: "🏝️",
+                title: "Maldives",
+                description: "You're a paradise seeker craving ultimate relaxation and beauty!",
+                details: `
+                    <h3>Why Maldives is Perfect for You:</h3>
+                    <ul>
+                        <li>Stay in luxury overwater bungalows</li>
+                        <li>Snorkel in crystal-clear turquoise waters</li>
+                        <li>Experience serene tropical island life</li>
+                        <li>Spot manta rays, whale sharks, and vibrant coral reefs</li>
+                        <li>Best time to visit: November-April (dry season)</li>
+                    </ul>
+                `
+            }
+        };
+
+        let currentQuestion = 0;
+        let scores = { greece: 0, brazil: 0, maldives: 0 };
+        let selectedAnswer = null;
+
+        function loadQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.innerHTML = `
+                    <label>
+                        <input type="radio" name="answer" value="${option.destination}" onchange="selectAnswer(this)">
+                        ${option.text}
+                    </label>
+                `;
+                optionsContainer.appendChild(optionDiv);
+            });
+
+            updateProgressBar();
+            selectedAnswer = null;
+            document.getElementById('nextBtn').disabled = true;
+        }
+
+        function selectAnswer(input) {
+            selectedAnswer = input.value;
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (selectedAnswer) {
+                scores[selectedAnswer]++;
+                currentQuestion++;
+
+                if (currentQuestion < questions.length) {
+                    loadQuestion();
+                } else {
+                    showResults();
+                }
+            }
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentQuestion) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function showResults() {
+            const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+            const result = destinations[winner];
+
+            document.getElementById('quizContainer').classList.remove('active');
+            document.getElementById('resultContainer').classList.add('active');
+            document.getElementById('resultEmoji').textContent = result.emoji;
+            document.getElementById('resultTitle').textContent = result.title;
+            document.getElementById('resultDescription').textContent = result.description;
+            document.getElementById('resultDetails').innerHTML = result.details;
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            scores = { greece: 0, brazil: 0, maldives: 0 };
+            selectedAnswer = null;
+            document.getElementById('quizContainer').classList.add('active');
+            document.getElementById('resultContainer').classList.remove('active');
+            loadQuestion();
+        }
+
+        // Initialize
+        loadQuestion();
+    </script>
+</body>
+</html>
