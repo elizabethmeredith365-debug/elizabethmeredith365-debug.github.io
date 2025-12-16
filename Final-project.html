@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ellie Meredith - Portfolio</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-bg: #ecf0f1;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Navbar Styling */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+        
+        .contact-info {
+            margin-top: 30px;
+        }
+        
+        .contact-info a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .contact-info a:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+        
+        /* Education & Experience Cards */
+        .timeline-item {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .timeline-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .timeline-item .location {
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-item .date {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Skills Badges */
+        .skill-badge {
+            display: inline-block;
+            background: var(--light-bg);
+            color: var(--primary-color);
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .skill-badge:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Travel Cards */
+        .travel-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            margin-bottom: 30px;
+            background: white;
+        }
+        
+        .travel-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .travel-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .travel-card-body {
+            padding: 30px;
+        }
+        
+        .travel-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .attraction-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .attraction-item:last-child {
+            border-bottom: none;
+        }
+        
+        .best-time {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        /* Awards Section */
+        .award-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-user-circle"></i> Ellie Meredith</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#resume"><i class="fas fa-briefcase"></i> Resume</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#travel"><i class="fas fa-plane"></i> Travel Dreams</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Ellie Meredith</h1>
+            <p>Business Professional | Marketing Enthusiast | World Traveler</p>
+            <div class="contact-info">
+                <a href="tel:6152028991"><i class="fas fa-phone"></i> (615) 202-8991</a>
+                <a href="mailto:meredeli@byu.edu"><i class="fas fa-envelope"></i> meredeli@byu.edu</a>
+                <a href="https://www.linkedin.com/in/ellie-meredith-84b02b329/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">Resume</h2>
+            
+            <!-- Education -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h3 class="mb-4"><i class="fas fa-graduation-cap text-primary"></i> Education</h3>
+                    
+                    <div class="timeline-item">
+                        <h4>Brigham Young University</h4>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Provo, UT</p>
+                        <p class="date">Expected Graduation: April 2027</p>
+                        <p><strong>Bachelor of Science in Pre-Business</strong></p>
+                        <p><strong>GPA: 3.86 / 4.00</strong></p>
+                        <ul>
+                            <li>Academic full-tuition scholarship</li>
+                            <li>BYU Marriott School Dean's List</li>
+                            <li>AI in Business Society - Curriculum and Meeting Specialist</li>
+                            <li>Member: Women in Entrepreneurship Club & Creators Club</li>
+                        </ul>
+                        <p><strong>Relevant Coursework:</strong> ACC 200, GSCM 201, GSCM 211, MKTG 201, ENT 101, IS 110, ECON 110, MSB 430</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>High School Diploma</h4>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> South Jordan & SLC, UT; Rexburg, ID</p>
+                        <p class="date">August 2020 - May 2024</p>
+                        <p><strong>GPA: 4.26 / 4.00 - Graduated Summa Cum Laude</strong></p>
+                        <p>Attended: Bingham, Olympus, Skyline, & Madison High Schools</p>
+                        <ul>
+                            <li>Rexburg Chamber of Commerce Business Scholarship</li>
+                            <li>President of Family, Career and Community Leaders of America (FCCLA)</li>
+                            <li>Vice President of National Honor Society</li>
+                            <li>Vice President of Business Professionals of America (BPA)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Experience -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h3 class="mb-4"><i class="fas fa-briefcase text-primary"></i> Experience</h3>
+                    
+                    <div class="timeline-item">
+                        <h4>Marketing Intern</h4>
+                        <p class="location"><i class="fas fa-building"></i> Alysio - Lehi, UT</p>
+                        <p class="date">October 2024 - December 2024</p>
+                        <ul>
+                            <li>Researched and wrote blog posts to increase brand awareness</li>
+                            <li>Created engaging LinkedIn content to drive audience engagement</li>
+                            <li>Edited podcast promotional videos for social media distribution</li>
+                            <li>Cold-called potential clients to generate new business leads</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>Team Leader</h4>
+                        <p class="location"><i class="fas fa-running"></i> Utah Valley Marathon - Provo, UT</p>
+                        <p class="date">September 2024 - December 2024</p>
+                        <ul>
+                            <li>Oversaw social media strategy: researched, brainstormed, designed, and posted 20+ pieces of content</li>
+                            <li>Managed team relations and coordinated project timelines</li>
+                            <li>Contacted partner organizations and sent strategic reminders</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>Regional Officer & Vice President</h4>
+                        <p class="location"><i class="fas fa-users"></i> Business Professionals of America - Rexburg, ID</p>
+                        <p class="date">August 2023 - May 2024</p>
+                        <ul>
+                            <li>Communicated with and recruited local businesses to give workshops at the regional conference</li>
+                            <li>Assisted in writing and delivering opening and closing ceremonies for regional conference</li>
+                            <li>Delivered a workshop to 50+ BPA members on professional development</li>
+                            <li>Prepared and presented information about regional and state events to chapter members</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Skills -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h3 class="mb-4"><i class="fas fa-star text-primary"></i> Skills & Interests</h3>
+                    <div class="text-center">
+                        <span class="skill-badge"><i class="fas fa-chart-line"></i> Marketing</span>
+                        <span class="skill-badge"><i class="fas fa-users"></i> Team Leadership</span>
+                        <span class="skill-badge"><i class="fas fa-bullhorn"></i> Social Media Strategy</span>
+                        <span class="skill-badge"><i class="fas fa-pen"></i> Content Creation</span>
+                        <span class="skill-badge"><i class="fas fa-video"></i> Video Editing</span>
+                        <span class="skill-badge"><i class="fas fa-phone-volume"></i> Client Outreach</span>
+                        <span class="skill-badge"><i class="fas fa-lightbulb"></i> Business Strategy</span>
+                        <span class="skill-badge"><i class="fas fa-chalkboard-teacher"></i> Public Speaking</span>
+                        <span class="skill-badge"><i class="fas fa-language"></i> Spanish (Bilingual)</span>
+                        <span class="skill-badge"><i class="fas fa-globe"></i> International Experience</span>
+                    </div>
+                    <p class="mt-4 text-center"><strong>Study Abroad:</strong> 9-week program in Rome, London, and Paris</p>
+                    <p class="text-center"><strong>Interests:</strong> Weight lifting, traveling, reading, and painting</p>
+                </div>
+            </div>
+            
+            <!-- Awards -->
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="mb-4"><i class="fas fa-trophy text-primary"></i> Awards & Honors</h3>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="award-item">
+                                <h5><i class="fas fa-medal"></i> Utah Seal of Biliteracy in Spanish</h5>
+                                <p class="mb-0">Official state recognition of bilingual proficiency</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="award-item">
+                                <h5><i class="fas fa-medal"></i> BYU Full-Tuition Scholarship</h5>
+                                <p class="mb-0">Academic merit-based scholarship</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="award-item">
+                                <h5><i class="fas fa-medal"></i> BPA National Finalist</h5>
+                                <p class="mb-0">Business Ethics & Professionalism, Entrepreneurship</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="award-item">
+                                <h5><i class="fas fa-medal"></i> FBLA Nationals 5th Place</h5>
+                                <p class="mb-0">Business Management competition</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="award-item">
+                                <h5><i class="fas fa-medal"></i> BPA State 1st Place</h5>
+                                <p class="mb-0">Business Ethics and Professionalism</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="award-item">
+                                <h5><i class="fas fa-medal"></i> FBLA State 1st Place</h5>
+                                <p class="mb-0">Business Management</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Travel Section -->
+    <section id="travel">
+        <div class="container">
+            <h2 class="section-title text-center">Travel Dreams</h2>
+            <p class="text-center mb-5 lead">Three destinations at the top of my bucket list</p>
+            
+            <div class="row">
+                <!-- Greece -->
+                <div class="col-md-4">
+                    <div class="travel-card">
+                        <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&h=600&fit=crop" alt="Santorini, Greece with white buildings and blue domes">
+                        <div class="travel-card-body">
+                            <h3><i class="fas fa-flag"></i> Greece</h3>
+                            <p>Greece has always captivated me with its perfect blend of ancient history, stunning Mediterranean landscapes, and vibrant culture. I dream of exploring the iconic white-washed buildings of Santorini, walking through ancient ruins, and experiencing the legendary Greek hospitality.</p>
+                            
+                            <h5 class="mt-4">Must-See Attractions:</h5>
+                            <div class="attraction-item"><i class="fas fa-map-pin text-primary"></i> The Acropolis & Parthenon in Athens</div>
+                            <div class="attraction-item"><i class="fas fa-map-pin text-primary"></i> Santorini's sunset views in Oia</div>
+                            <div class="attraction-item"><i class="fas fa-map-pin text-primary"></i> Ancient ruins of Delphi</div>
+                            <div class="attraction-item"><i class="fas fa-map-pin text-primary"></i> Mykonos beaches and windmills</div>
+                            <div class="attraction-item"><i class="fas fa-map-pin text-primary"></i> Meteora monasteries</div>
+                            
+                            <div class="best-time">
+                                <strong><i class="fas fa-sun"></i> Best Time to Visit:</strong><br>
+                                April to June or September to October for pleasant weather and fewer crowds
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Brazil -->
+                <div class="col-md-4">
+                    <div class="travel-card">
+                        <img src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=800&h=600&fit=crop" alt="Christ the Redeemer statue overlooking Rio de Janeiro, Brazil">
+                        <div class="travel-card-body">
+                            <h3><i class="fas fa-flag"></i> Brazil</h3>
+                            <p>Brazil's energy is contagious! From the rhythm of samba to the breathtaking natural wonders, I'm drawn to Brazil's vibrant culture and diverse landscapes. I want to experience Carnival, explore the Amazon rainforest, and marvel at the iconic Christ the Redeemer statue.</p>
+                            
+                            <h5 class="mt-4">Must-See Attractions:</h5>
+                            <div class="attraction-item"><i class="fas fa-map-pin text-primary"></i> Christ the Redeemer in Rio de Janeiro</div>
+                            <div class="attraction-item"><i class="fas fa-map-pin text-primary"></i> Iguazu Falls on the border with Argentina</div>
+                            <div class="attraction-item"><i class="fas fa-map-pin text-primary"></i> Amazon Rainforest expedition</div>
+                            <div class="attraction-item"><i class="fas fa-map-pin text-primary"></i> Copacabana and Ipanema beaches</div>
+                            <div class="attraction-item"><i class="fas fa-map-pin text-primary"></i> Salvador's historic Pelourinho district</div>
+                            
+                            <div class="best-time">
+                                <strong><i class="fas fa-sun"></i> Best Time to Visit:</strong><br>
+                                December to March for summer and Carnival; September to November for pleasant weather
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Maldives -->
+                <div class="col-md-4">
+                    <div class="travel-card">
+                        <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&h=600&fit=crop" alt="Overwater bungalows in the Maldives with crystal clear turquoise water">
+                        <div class="travel-card-body">
+                            <h3><i class="fas fa-flag"></i> Maldives</h3>
+                            <p>The Maldives represents the ultimate tropical paradise. I'm enchanted by the idea of staying in an overwater bungalow, snorkeling in crystal-clear waters, and experiencing the serene beauty of these islands. It's my dream destination for relaxation and underwater exploration.</p>
+                            
+                            <h5 class="mt-4">Must-See Attractions:</h5>
+                            <div class="attraction-item"><i class="fas fa-map-pin text-primary"></i> Bioluminescent beaches on Vaadhoo Island</div>
+                            <div class="attraction-item"><i class="fas fa-map-pin text-primary"></i> Snorkeling at Banana Reef</div>
+                            <div class="attraction-item"><i class="fas fa-map-pin text-primary"></i> Underwater restaurant at Hurawalhi</div>
+                            <div class="attraction-item"><i class="fas fa-map-pin text-primary"></i> Malé's Grand Friday Mosque</div>
+                            <div class="attraction-item"><i class="fas fa-map-pin text-primary"></i> Swimming with manta rays and whale sharks</div>
+                            
+                            <div class="best-time">
+                                <strong><i class="fas fa-sun"></i> Best Time to Visit:</strong><br>
+                                November to April for dry season with calm seas and perfect diving conditions
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Ellie Meredith. All rights reserved.</p>
+            <p>
+                <a href="tel:6152028991" style="color: white; margin: 0 10px;"><i class="fas fa-phone"></i></a>
+                <a href="mailto:meredeli@byu.edu" style="color: white; margin: 0 10px;"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/ellie-meredith-84b02b329/" target="_blank" style="color: white; margin: 0 10px;"><i class="fab fa-linkedin"></i></a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Smooth Scrolling -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
